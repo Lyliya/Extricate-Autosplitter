@@ -5,18 +5,20 @@
 
 state("Extricate")
 {
-    uint lvl : "mono-2.0-bdwgc.dll", 0x0048FA90, 0xBC0, 0x3C8, 0x70, 0x9F8;
-    float igt : "UnityPlayer.dll", 0x015F5EF8, 0x1F0, 0x2A0, 0x4E0, 0x438, 0x80, 0x10, 0x72C;
+    uint lvl : "UnityPlayer.dll", 0x01771860, 0x60, 0x10, 0x98, 0x18, 0xE0, 0xF6C;
+    float igt : "mono-2.0-bdwgc.dll", 0x00493DA8, 0xB0, 0xCC0, 0x60, 0x50, 0x40, 0x0, 0x524;
 }
 
 init
 {
+    refreshRate = 30;
     vars.reset = 1;
 }
 
 update
 {
     if (current.igt < old.igt) {
+        print("Reset here");
         vars.reset = 1;
     }
 }
@@ -39,6 +41,7 @@ startup
 start
 {
     if (vars.reset == 1 && current.lvl == 1) {
+        print("Start Here");
         vars.reset = 0;
         return true;
     }
@@ -51,19 +54,11 @@ split
     }
 }
 
-reset
-{
-}
-
-isLoading
-{
+isLoading {
     return true;
 }
 
 gameTime
 {
-    return TimeSpan.FromMilliseconds(Math.Floor(current.igt));
-}
-
-shutdown {
+    return TimeSpan.FromMilliseconds(10000);
 }
