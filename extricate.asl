@@ -6,7 +6,7 @@
 state("Extricate")
 {
     uint lvl : "UnityPlayer.dll", 0x01771968, 0x60, 0x10, 0x70, 0x20, 0x18, 0xF6C;
-    float igt : "UnityPlayer.dll", 0x0179E8E0, 0xE20, 0x228, 0x98, 0x80, 0x0, 0x6C;
+    float igt : "UnityPlayer.dll", 0x0177C4F0, 0x3C8, 0x30, 0x428, 0x298, 0x228, 0x1B0, 0x4;
 }
 
 init
@@ -38,10 +38,7 @@ startup
 
 start
 {
-    if (vars.reset == 1 && current.lvl == 1) {
-        vars.reset = 0;
-        return true;
-    }
+    return (current.lvl == 1 && current.igt > 0);
 }
 
 split
@@ -53,6 +50,7 @@ split
 
 reset
 {
+    return (current.lvl < old.lvl);
 }
 
 isLoading
@@ -62,7 +60,7 @@ isLoading
 
 gameTime
 {
-    return TimeSpan.FromMilliseconds(current.igt);
+    if (current.igt > old.igt) return TimeSpan.FromMilliseconds(current.igt);
 }
 
 shutdown {
