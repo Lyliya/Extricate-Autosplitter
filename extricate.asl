@@ -62,7 +62,7 @@ isLoading
 
 gameTime
 {
-    return TimeSpan.FromMilliseconds(Math.Floor(current.igt));
+    return TimeSpan.FromMilliseconds(current.igt);
 }
 
 shutdown {
