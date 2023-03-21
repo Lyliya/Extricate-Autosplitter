@@ -60,5 +60,5 @@ isLoading {
 
 gameTime
 {
-    return TimeSpan.FromMilliseconds(10000);
+    return TimeSpan.FromMilliseconds(current.igt);
 }
