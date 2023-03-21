@@ -16,7 +16,6 @@ init
 
 update
 {
-    print("igt:" + current.igt);
     if (current.igt < old.igt) {
         vars.reset = 1;
     }
